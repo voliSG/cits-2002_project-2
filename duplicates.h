@@ -3,8 +3,10 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <sys/types.h>
+#include <sys/param.h>
 
 typedef struct{
-  String hash;
-  
+  char *hash;
+  int filesize;
+  char **pathname;
 }FILE;
