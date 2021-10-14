@@ -9,4 +9,4 @@ typedef struct{
   char *hash;
   int filesize;
   char **pathname;
-}FILE;
+}FILE_DATA;
