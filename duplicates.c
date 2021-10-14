@@ -1,3 +1,7 @@
+// CITS2002 Project 2 2021
+// Name(s): Sean Peralta Garcia, Agnibho Gangopadhyay
+// Student number(s): 23088091, 23175264
+
 #include "duplicates.h"
 #include <getopt.h>
 
@@ -29,4 +33,11 @@ int main(int argc, char *argv[])
         break;
     }
   }
+
+// PRINTS NON OPTION ARGS
+//  for(; optind < argc; optind++){     
+//          printf("extra arguments: %s\n", argv[optind]); 
+//  }
+
+
 }

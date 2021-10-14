@@ -9,4 +9,5 @@ typedef struct{
   char *hash;
   int filesize;
   char **pathname;
+  int num_files;
 }FILE_DATA;
