@@ -1,4 +1,4 @@
-#include <duplicates.h>
+#include "duplicates.h"
 #define OPTLIST   "aAfhlq"
 int main(int argc, char *argv[])
 {
