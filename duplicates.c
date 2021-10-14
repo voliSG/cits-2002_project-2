@@ -1,5 +1,4 @@
 #include <duplicates.h>
-<<<<<<< HEAD
 #define OPTLIST   "aAfhlq"
 int main(int argc, char *argv[])
 {
@@ -22,5 +21,3 @@ int main(int argc, char *argv[])
     }
   }
 }
-=======
->>>>>>> 9a3b60849f1f9abe720f13f9c218b582087b8d8c
