@@ -1,5 +1,5 @@
 #include "duplicates.h"
-
+#include <getopt.h>
 
 #define OPTLIST   "aAfhlq"
 

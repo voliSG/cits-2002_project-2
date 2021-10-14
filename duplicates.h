@@ -4,7 +4,6 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/param.h>
-#include <getopt.h>
 
 typedef struct{
   char *hash;
