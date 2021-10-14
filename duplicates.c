@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
       case 'l':
 
       case 'q':
-      
+
     }
   }
 }
