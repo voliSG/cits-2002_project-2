@@ -1,5 +1,17 @@
 #include "hashtable.h"
 
+// hash function for array indexing
+uint32_t hash_index(char *string) {
+    uint32_t hash = 0;
+    while(*string != '\0') {
+        hash = hash*31 + *string;
+            ++string;
+    }
+    // returns valid index in array
+    return hash % TABLE_SIZE;
+}
+
+
 // DEFINE LINKED LIST FUNCTIONS
 FILE_DATA *filehash_find(LIST *list, char *filehash) {
     while(list != NULL) {
@@ -24,17 +36,6 @@ LIST *list_add(LIST *list, FILE_DATA *file) {
 
 
 // DEFINE HASHTABLE FUNCTIONS
-// hash function for array indexing
-uint32_t hash_index(char *string) {
-    uint32_t hash = 0;
-    while(*string != '\0') {
-        hash = hash*31 + *string;
-            ++string;
-    }
-    // returns valid index in array
-    return hash % TABLE_SIZE;
-}
-
 // allocate memory for hashtable
 HASHTABLE *hashtable_init() {
     HASHTABLE   *new_hasht = malloc(TABLE_SIZE * sizeof(LIST *));

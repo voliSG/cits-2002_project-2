@@ -26,9 +26,11 @@ typedef struct _list{
 typedef LIST *HASHTABLE;
 
 // DECLARE FUNCTIONS THAT ARE DEFINED IN hashtable.c
-
 // hash function for array indexing
 extern  uint32_t        hash_string(char *string);
 
 extern  HASHTABLE       *hashtable_init();
 
+extern  void            hashtable_add(HASHTABLE *hashtable, FILE_DATA *file);
+
+extern  FILE_DATA       *hashtable_get(HASHTABLE *hashtable, char *filehash);
