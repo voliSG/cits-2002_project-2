@@ -1,15 +1,21 @@
 #include "hashtable.h"
 
-// define stuff
-#define TABLE_SIZE 1301
-
 // hash function for array indexing
-unsigned int hash(char *filehash) {
-  return 0;
+uint32_t hash_string(char *string)
+{
+    uint32_t hash = 0;
+    while(*string != '\0') {
+        hash = hash*31 + *string;
+            ++string;
+    }
+    return hash;
 }
 
-void hashtable_init() {
-
+// initialise hashtable values to NULL
+void hashtable_init(int *hash_table[]) {
+    for (int i=0; i < TABLE_SIZE; ++i) {
+        hash_table[i] = NULL;
+    }
 }
 
 void hashtable_add() {
