@@ -6,8 +6,9 @@
 #include <sys/param.h>
 
 typedef struct{
-  char *hash;
+  char *filehash;
   int filesize;
   char **pathname;
   int num_files;
+  // next FILE_DATA
 }FILE_DATA;
