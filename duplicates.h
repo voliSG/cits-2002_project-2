@@ -4,13 +4,4 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/param.h>
-
-extern FILE_DATA **readDir();
-
-typedef struct{
-    char *filehash;
-    int filesize;
-    char **pathname;
-    int num_files;
-    // next FILE_DATA field
-}FILE_DATA;
+#include  <sys/stat.h>
