@@ -18,7 +18,7 @@ typedef struct _file{
 // define linked list struct
 typedef struct _list{
     struct _file    *file;
-    struct _list        *next;
+    struct _list    *next;
 }LIST;
 
 

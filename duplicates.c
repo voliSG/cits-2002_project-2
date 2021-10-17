@@ -10,6 +10,9 @@
 int main(int argc, char *argv[])
 {
     int opt;
+    
+    // flag to determine if hidden files are to be read
+    //bool show_hidden = false;
 
     // file hash (usage: -f, -h)
     //char *hash_key;
@@ -17,7 +20,7 @@ int main(int argc, char *argv[])
     while((opt = getopt(argc, argv, OPTLIST)) != -1){
         switch (opt) {
             case 'a':
-            // create some sort of flag to read hidden files
+                //show_hidden = true;
                 printf("a\n");
                 break;
 
