@@ -13,7 +13,7 @@ HASHTABLE *readDir(char *dirname, bool show_hidden) {
         exit(EXIT_FAILURE);
     }
 
-    while((dp = readdir(dirp)) != NULL) {  
+    while((dp = readdir(dirp)) != NULL) {
         struct stat     stat_buffer;
         struct stat *stat_p = &stat_buffer;
         char            pathname[MAXPATHLEN];
@@ -29,9 +29,10 @@ HASHTABLE *readDir(char *dirname, bool show_hidden) {
             // if show_hidden == true then read all files OR
             // show_hidden == false AND file name starts with '.'
             if (show_hidden || (!show_hidden && dp->d_name[0] != '.')) {
-                // get SHA2 hash
+                filehash = strSHA2(pathname);
+                
             }
-            
+
 
             // check if hash already in hashtable hashtable_get()
             // if return pointer (at least one list node)
