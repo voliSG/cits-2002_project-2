@@ -12,6 +12,14 @@ int total_size  = 0;
 int min_files   = 0;
 int min_size    = 0;
 
+void print_solutions()
+{
+  printf("%i\n", total_files);
+  printf("%i\n", total_size);
+  printf("%i\n", min_files);
+  printf("%i\n", min_size);
+}
+
 int main(int argc, char *argv[])
 {
     int opt;
@@ -75,4 +83,6 @@ int main(int argc, char *argv[])
                 break;
         }
     }
+    print_solutions();
+    exit(EXIT_SUCCESS);
 }
