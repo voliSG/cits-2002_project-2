@@ -30,8 +30,10 @@ HASHTABLE *readDir(char *dirname, bool show_hidden) {
             // show_hidden == false AND file name starts with '.'
             if (show_hidden || (!show_hidden && dp->d_name[0] != '.')) {
                 filehash = strSHA2(pathname);
-                
+                printf("%s", filehash);
             }
+
+            exit(EXIT_SUCCESS);
 
 
             // check if hash already in hashtable hashtable_get()

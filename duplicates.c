@@ -10,9 +10,12 @@
 int main(int argc, char *argv[])
 {
     int opt;
+
+    //
+    HASHTABLE *files;
     
     // flag to determine if hidden files are to be read
-    //bool show_hidden = false;
+    bool show_hidden = false;
 
     // file hash (usage: -f, -h)
     //char *hash_key;
@@ -62,6 +65,11 @@ int main(int argc, char *argv[])
 
             default:
             // no flag has been parsed
+                printf("call readDir");
+
+                files = readDir(argv[1], show_hidden);
+
+                hashtable_get(files, "aa");
                 // output stats
                 break;
         }

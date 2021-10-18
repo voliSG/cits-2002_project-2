@@ -1,4 +1,3 @@
-#include "hashtable.h"
 #include "duplicates.h"
 
 // DECLARE EXTERNAL FUNCTIONS
