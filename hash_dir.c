@@ -32,22 +32,42 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
         }
         else if( S_ISREG( stat_p->st_mode )) {
             char *filehash;
+            FILE_DATA *file;
 
             // if show_hidden == true then read all files OR
             // show_hidden == false AND file name starts with '.'
             if (show_hidden || (!show_hidden && dp->d_name[0] != '.')) {
                 filehash = strSHA2(pathname);
-            }
 
-            hashtable_get(files, filehash);
-            // check if hash already in hashtable hashtable_get()
-            // if return pointer (at least one list node)
-                // search nodes for correct hash (strcmp)
-                // add filepath to string array
-                // increment num_files
-            // if return NULL (no files in index)
-                // create FILE_DATA struct
-                // call hashtable_add()
+                // check if hash already in hashtable hashtable_get()
+                file = hashtable_get(files, filehash);
+                
+                // if return pointer (duplicate)
+                if (file != NULL) {
+                    ++file->num_files;          // increment
+
+                    // add filepath to FILE_DATA (*file)
+                    file->pathname = realloc(file->pathname, (file->num_files) * sizeof(pathname));         // allocate memory for one pointer of
+                    file->pathname[file->num_files] = strdup(pathname);
+
+
+
+                    ++total_files;          // increment total_files
+                    // update total_size
+
+
+                // if return NULL (unique file)
+                } else {
+                    // create FILE_DATA struct
+
+                    // call hashtable_add()
+
+
+                    ++total_files;          // increment total_files
+                    ++min_files;            // increment min_files
+                    //update min_size
+                }
+            }
         }
         else {
             printf("Error: no such file or directory\n");

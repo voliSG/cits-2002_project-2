@@ -12,6 +12,18 @@ int total_size  = 0;
 int min_files   = 0;
 int min_size    = 0;
 
+char **hash_array;
+
+
+
+
+////////////////////////////////////
+
+// usage()
+//  - argc < 2
+//  - wrong flag
+
+
 void print_solutions()
 {
   printf("%i\n", total_files);
