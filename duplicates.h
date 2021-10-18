@@ -8,5 +8,11 @@
 
 #include "hashtable.h"
 
+//declare variables for statistics
+extern int total_files;
+extern int total_size;
+extern int min_files;
+extern int min_size;
+
 // declare function that reads directory
 extern HASHTABLE    *hash_dir(char *dirname, bool show_hidden);

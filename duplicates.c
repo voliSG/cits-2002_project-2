@@ -7,13 +7,18 @@
 
 #define OPTLIST    "aAfhlq"
 
+int total_files = 0;
+int total_size  = 0;
+int min_files   = 0;
+int min_size    = 0;
+
 int main(int argc, char *argv[])
 {
     int opt;
 
     //
     HASHTABLE *files;
-    
+
     // flag to determine if hidden files are to be read
     bool show_hidden = false;
 
@@ -43,7 +48,7 @@ int main(int argc, char *argv[])
                 //char *file_path = argv[optind];
 
                 // obtain hash of file
-        
+
 
                 // increment optind to index directory path
                 ++optind;
