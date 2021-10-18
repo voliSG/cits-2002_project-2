@@ -20,6 +20,12 @@ int main(int argc, char *argv[])
     // file hash (usage: -f, -h)
     //char *hash_key;
 
+    // no flag has been parsed
+    files = hash_dir(argv[1], show_hidden);
+
+    hashtable_get(files, "aa");
+    // output stats
+
     while((opt = getopt(argc, argv, OPTLIST)) != -1){
         switch (opt) {
             case 'a':
@@ -61,16 +67,6 @@ int main(int argc, char *argv[])
 
             case 'q':
                 printf("q\n");
-                break;
-
-            default:
-            // no flag has been parsed
-                printf("call readDir");
-
-                files = readDir(argv[1], show_hidden);
-
-                hashtable_get(files, "aa");
-                // output stats
                 break;
         }
     }

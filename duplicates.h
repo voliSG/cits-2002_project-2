@@ -9,4 +9,4 @@
 #include "hashtable.h"
 
 // declare function that reads directory
-extern HASHTABLE    *readDir(char *dirname, bool show_hidden);
+extern HASHTABLE    *hash_dir(char *dirname, bool show_hidden);

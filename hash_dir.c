@@ -1,7 +1,7 @@
-#include "readDir.h"
+#include "hash_dir.h"
 
 // return files
-HASHTABLE *readDir(char *dirname, bool show_hidden) {
+HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
     HASHTABLE *files    = hashtable_init();
 
     DIR             *dirp;
@@ -20,8 +20,15 @@ HASHTABLE *readDir(char *dirname, bool show_hidden) {
 
         sprintf(pathname, "%s/%s", dirname, dp->d_name);
 
+        if(stat(pathname, &stat_buffer) != 0) {
+            perror( pathname );
+            exit(EXIT_FAILURE);
+        }
+
         if( S_ISDIR( stat_p->st_mode )) {
-            readDir(pathname, show_hidden);
+            if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0) {
+                hash_dir(pathname, show_hidden);
+            }
         }
         else if( S_ISREG( stat_p->st_mode )) {
             char *filehash;
@@ -30,12 +37,9 @@ HASHTABLE *readDir(char *dirname, bool show_hidden) {
             // show_hidden == false AND file name starts with '.'
             if (show_hidden || (!show_hidden && dp->d_name[0] != '.')) {
                 filehash = strSHA2(pathname);
-                printf("%s", filehash);
             }
 
-            exit(EXIT_SUCCESS);
-
-
+            hashtable_get(files, filehash);
             // check if hash already in hashtable hashtable_get()
             // if return pointer (at least one list node)
                 // search nodes for correct hash (strcmp)
@@ -46,7 +50,7 @@ HASHTABLE *readDir(char *dirname, bool show_hidden) {
                 // call hashtable_add()
         }
         else {
-            perror("Error: no such file or directory");
+            printf("Error: no such file or directory\n");
         }
     }
     closedir(dirp);
