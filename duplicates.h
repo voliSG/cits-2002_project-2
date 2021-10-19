@@ -19,3 +19,8 @@ extern char     **hash_array;
 
 // declare function that reads directory
 extern HASHTABLE    *hash_dir(char *dirname, bool show_hidden);
+
+// declare SHA2 hash used for files
+extern	char        *strSHA2(char *filename);
+
+extern  char        *strdup(const char *s);

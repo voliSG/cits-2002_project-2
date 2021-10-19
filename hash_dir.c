@@ -1,4 +1,4 @@
-#include "hash_dir.h"
+#include "duplicates.h"
 
 // return files
 HASHTABLE *hash_dir(char *dirname, bool show_hidden) {

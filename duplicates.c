@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
     // file hash (usage: -f, -h)
     char *hash_key = NULL;
 
-    // no flag has been parsed
     files = hash_dir(argv[1], show_hidden);
+
 
     hashtable_get(files, "aa"); //placeholder 
     // output stats
@@ -66,10 +66,9 @@ int main(int argc, char *argv[])
             case 'f': ;
             // get hash of file then continue with -h
 
-
-
-            // NOTE: filepath will appear before directory
                 // optind will point to filepath
+                // hash_key = strS
+
                 //char *file_path = argv[optind];
 
                 // obtain hash of file
@@ -83,9 +82,9 @@ int main(int argc, char *argv[])
 
                 // if hash_key != NULL then opt was -f
 
-                //char *hash_key = argv[optind];
+                //hash_key = argv[optind];
 
-                printf("h\n");
+
                 break;
 
             case 'l':
@@ -93,10 +92,13 @@ int main(int argc, char *argv[])
                 break;
 
             case 'q':
-                printf("q\n");
+                if (total_files == min_files) {}
                 break;
         }
     }
+    // no flag has been parsed
+    files = hash_dir(argv[1], show_hidden);
+
     print_solutions();
     exit(EXIT_SUCCESS);
 }
