@@ -10,7 +10,6 @@
 // define FILE_DATA struct
 typedef struct _file{
     char *filehash;
-    int filesize;
     char **pathname;
     int num_files;
 }FILE_DATA;

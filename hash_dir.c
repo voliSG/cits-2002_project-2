@@ -47,25 +47,38 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
                     ++file->num_files;          // increment
 
                     // add filepath to FILE_DATA (*file)
-                    file->pathname = realloc(file->pathname, (file->num_files) * sizeof(pathname));         // allocate memory for one pointer of
-                    file->pathname[file->num_files] = strdup(pathname);
+                    char *path_p = strdup(pathname);
+                    file->pathname = realloc(file->pathname, (file->num_files) * sizeof(path_p));         // allocate memory for one pointer of
+                    file->pathname[file->num_files] = path_p;
 
 
+                    ++total_files;                      // increment total_files
+                    total_size += stat_p->st_size;      // update total_size
 
-                    ++total_files;          // increment total_files
-                    // update total_size
+                    // 
 
 
                 // if return NULL (unique file)
                 } else {
                     // create FILE_DATA struct
+                    FILE_DATA new_file;
+                    FILE_DATA *p_newfile;
 
-                    // call hashtable_add()
+                    p_newfile->filehash    = strdup(filehash);         // set filehash
+                    p_newfile->num_files   = 1;                        // set num_files
+                
+                    char *path_p = strdup(pathname);                   //
+                    p_newfile->pathname    = malloc(sizeof(path_p));   // init file
+                    p_newfile->pathname[1] = path_p;
 
 
-                    ++total_files;          // increment total_files
-                    ++min_files;            // increment min_files
-                    //update min_size
+                    hashtable_add(files, p_newfile);                   // add new file to hashtable
+
+
+                    ++total_files;                                     // increment total_files
+                    ++min_files;                                       // increment min_files
+                    total_size += stat_p->st_size;                     // update total_size
+                    min_size   += stat_p->st_size;                     // update min_size
                 }
             }
         }

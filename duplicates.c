@@ -7,12 +7,13 @@
 
 #define OPTLIST    "aAfhlq"
 
-int total_files = 0;
-int total_size  = 0;
-int min_files   = 0;
-int min_size    = 0;
+int total_files   = 0;
+int total_size    = 0;
+int min_files     = 0;
+int min_size      = 0;
 
-char **hash_array;
+char **hash_array = NULL;  // usage -l
+
 
 
 
@@ -36,33 +37,37 @@ int main(int argc, char *argv[])
 {
     int opt;
 
-    //
+    // define
     HASHTABLE *files;
 
     // flag to determine if hidden files are to be read
     bool show_hidden = false;
 
     // file hash (usage: -f, -h)
-    //char *hash_key;
+    char *hash_key = NULL;
 
     // no flag has been parsed
     files = hash_dir(argv[1], show_hidden);
 
-    hashtable_get(files, "aa");
+    hashtable_get(files, "aa"); //placeholder 
     // output stats
 
     while((opt = getopt(argc, argv, OPTLIST)) != -1){
         switch (opt) {
-            case 'a':
-                //show_hidden = true;
-                printf("a\n");
-                break;
-
             case 'A':
                 printf("A\n");
                 exit(EXIT_FAILURE);
 
+            case 'a':
+                show_hidden = true;
+                printf("a\n");
+                break;
+
             case 'f': ;
+            // get hash of file then continue with -h
+
+
+
             // NOTE: filepath will appear before directory
                 // optind will point to filepath
                 //char *file_path = argv[optind];
@@ -73,14 +78,11 @@ int main(int argc, char *argv[])
                 // increment optind to index directory path
                 ++optind;
 
-
-
-
-                printf("f\n");
-                break;
-
             case 'h': ;
             // NOTE: hash will appear before directory
+
+                // if hash_key != NULL then opt was -f
+
                 //char *hash_key = argv[optind];
 
                 printf("h\n");
