@@ -16,16 +16,13 @@ char **hash_array = NULL;  // usage -l
 
 
 
-
-
-////////////////////////////////////
-//  - argc < 2
-//  - wrong flag
 void usage(bool a)
 {
+  //when argc < 2
   if(a){
     printf("Enter the correct number of arguments (i.e. <directory>/<filename>)\n");
   }
+  //when wrong flag used
   else{
     printf("The incorrect flag was used, (i.e. -a,-f,-h,-l,-q)\n");
   }
