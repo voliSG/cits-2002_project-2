@@ -19,10 +19,18 @@ char **hash_array = NULL;  // usage -l
 
 
 ////////////////////////////////////
-
-// usage()
 //  - argc < 2
 //  - wrong flag
+void usage(bool a)
+{
+  if(a){
+    printf("Enter the correct number of arguments (i.e. <directory>/<filename>)\n");
+  }
+  else{
+    printf("The incorrect flag was used, (i.e. -a,-f,-h,-l,-q)\n");
+  }
+  exit(EXIT_FAILURE);
+}
 
 
 void print_solutions()
@@ -37,6 +45,11 @@ int main(int argc, char *argv[])
 {
     int opt;
 
+    //checking the number of arguments
+    if(argc < 2){
+      usage(true);
+    }
+
     // define
     HASHTABLE *files;
 
@@ -46,10 +59,10 @@ int main(int argc, char *argv[])
     // file hash (usage: -f, -h)
     char *hash_key = NULL;
 
+    // no flag has been parsed
     files = hash_dir(argv[1], show_hidden);
 
-
-    hashtable_get(files, "aa"); //placeholder 
+    hashtable_get(files, "aa"); //placeholder
     // output stats
 
     while((opt = getopt(argc, argv, OPTLIST)) != -1){
@@ -66,9 +79,10 @@ int main(int argc, char *argv[])
             case 'f': ;
             // get hash of file then continue with -h
 
-                // optind will point to filepath
-                // hash_key = strS
 
+
+            // NOTE: filepath will appear before directory
+                // optind will point to filepath
                 //char *file_path = argv[optind];
 
                 // obtain hash of file
@@ -82,9 +96,9 @@ int main(int argc, char *argv[])
 
                 // if hash_key != NULL then opt was -f
 
-                //hash_key = argv[optind];
+                //char *hash_key = argv[optind];
 
-
+                printf("h\n");
                 break;
 
             case 'l':
@@ -92,13 +106,12 @@ int main(int argc, char *argv[])
                 break;
 
             case 'q':
-                if (total_files == min_files) {}
+                printf("q\n");
                 break;
+            default:
+                usage(false);
         }
     }
-    // no flag has been parsed
-    files = hash_dir(argv[1], show_hidden);
-
     print_solutions();
     exit(EXIT_SUCCESS);
 }
