@@ -16,12 +16,14 @@ uint32_t hash_index(char *string) {
 FILE_DATA *filehash_find(LIST *list, char *filehash) {
     while(list != NULL) {
         FILE_DATA *file = list->file;
+
         // if filehash arg matches filehash in list 
-        if(strcmp(file->filehash, filehash)) {
+        if(strcmp(file->filehash, filehash) == 0) {
             return file;
         }
         list = list->next;
     }
+    
     // no files found
     return NULL;
 }
@@ -30,9 +32,9 @@ LIST *list_add(LIST *list, FILE_DATA *file) {
     // allocate memory for 1 node 
     LIST *new_ls    = malloc(sizeof(LIST));
     new_ls->file    = file;
-    printf("\ttest add: %s\n", new_ls->file->filehash);
     new_ls->next    = list;
-    return new_ls;
+
+    return new_ls; 
 }
 
 
@@ -46,7 +48,6 @@ HASHTABLE *hashtable_init() {
 void hashtable_add(HASHTABLE *hashtable, FILE_DATA *file) {
     uint32_t index = hash_index(file->filehash);
 
-    printf("\tindex: %i\n", index);      
     hashtable[index] = list_add(hashtable[index], file);
 }
 

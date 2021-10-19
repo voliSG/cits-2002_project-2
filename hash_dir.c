@@ -44,7 +44,6 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
 
                 // if return pointer (duplicate)
                 if (file != NULL) {
-                    printf("duplicate\n");
                     ++file->num_files;          // increment
 
                     // add filepath to FILE_DATA (*file)
@@ -61,7 +60,6 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
 
                 // if return NULL (unique file)
                 } else {
-                    printf("new\n");
                     // create FILE_DATA struct
                     FILE_DATA new_file;
                     FILE_DATA *p_newfile = &new_file;

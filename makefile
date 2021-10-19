@@ -1,6 +1,6 @@
 PROJECT = duplicates
 HEADERS = $(PROJECT).h
-OBJ     = duplicates.o hf_flags.o hash_dir.o hashtable.o strSHA2.o l_flag.o
+OBJ     = duplicates.o hf_flags.o l_flag.o hash_dir.o hashtable.o strSHA2.o
 
 C11 = cc -std=c11
 CFLAGS = -Wall -Werror -pedantic
