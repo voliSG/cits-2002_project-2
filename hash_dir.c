@@ -41,7 +41,7 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
 
                 // check if hash already in hashtable hashtable_get()
                 file = hashtable_get(files, filehash);
-                
+
                 // if return pointer (duplicate)
                 if (file != NULL) {
                     ++file->num_files;          // increment
@@ -55,7 +55,7 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
                     ++total_files;                      // increment total_files
                     total_size += stat_p->st_size;      // update total_size
 
-                    // 
+                    //
 
 
                 // if return NULL (unique file)
@@ -65,11 +65,11 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
                     FILE_DATA *p_newfile;
 
                     p_newfile->filehash    = strdup(filehash);         // set filehash
-                    p_newfile->num_files   = 1;                        // set num_files
-                
+                    p_newfile->num_files   = 0;                        // set num_files
+
                     char *path_p = strdup(pathname);                   //
                     p_newfile->pathname    = malloc(sizeof(path_p));   // init file
-                    p_newfile->pathname[1] = path_p;
+                    p_newfile->pathname[0] = path_p;
 
 
                     hashtable_add(files, p_newfile);                   // add new file to hashtable
