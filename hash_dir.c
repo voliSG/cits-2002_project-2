@@ -62,7 +62,7 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
                 } else {
                     // create FILE_DATA struct
                     FILE_DATA new_file;
-                    FILE_DATA *p_newfile;
+                    FILE_DATA *p_newfile = &new_file;
 
                     p_newfile->filehash    = strdup(filehash);         // set filehash
                     p_newfile->num_files   = 0;                        // set num_files

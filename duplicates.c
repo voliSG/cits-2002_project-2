@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     bool show_hidden = false;
 
     // file hash (usage: -f, -h)
-    char *hash_key = NULL;
+    //char *hash_key = NULL;
 
     // no flag has been parsed
     files = hash_dir(argv[1], show_hidden);
