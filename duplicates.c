@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
 
             case 'l':
                 files = hash_dir(argv[optind], show_hidden);
+                l_flag(files);
                 break;
 
             case 'q':
