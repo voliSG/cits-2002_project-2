@@ -66,9 +66,9 @@ int main(int argc, char *argv[])
                 show_hidden = true;
                 break;
             default:
-                break;     
+                break;
         }
-    } 
+    }
 
     while((opt = getopt(argc, argv, OPTLIST)) != -1){
         switch (opt) {
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
         }
     }
     // no flag has been parsed
-    files = hash_dir(argv[1], show_hidden);
+    files = hash_dir(argv[argc-1], show_hidden);
 
     print_solutions();
     exit(EXIT_SUCCESS);
