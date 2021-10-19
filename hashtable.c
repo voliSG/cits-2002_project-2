@@ -30,6 +30,7 @@ LIST *list_add(LIST *list, FILE_DATA *file) {
     // allocate memory for 1 node 
     LIST *new_ls    = malloc(sizeof(LIST));
     new_ls->file    = file;
+    printf("\ttest add: %s\n", new_ls->file->filehash);
     new_ls->next    = list;
     return new_ls;
 }
@@ -44,7 +45,8 @@ HASHTABLE *hashtable_init() {
 
 void hashtable_add(HASHTABLE *hashtable, FILE_DATA *file) {
     uint32_t index = hash_index(file->filehash);
-    
+
+    printf("\tindex: %i\n", index);      
     hashtable[index] = list_add(hashtable[index], file);
 }
 

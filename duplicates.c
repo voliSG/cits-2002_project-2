@@ -32,10 +32,10 @@ void usage(bool a)
 
 void print_solutions()
 {
-  printf("%i\n", total_files);
-  printf("%i\n", total_size);
-  printf("%i\n", min_files);
-  printf("%i\n", min_size);
+    printf("%i\n", total_files);
+    printf("%i\n", total_size);
+    printf("%i\n", min_files);
+    printf("%i\n", min_size);
 }
 
 int main(int argc, char *argv[])
@@ -54,13 +54,21 @@ int main(int argc, char *argv[])
     bool show_hidden = false;
 
     // file hash (usage: -f, -h)
-    //char *hash_key = NULL;
+    char *hash_key = NULL;
 
-    // no flag has been parsed
-    files = hash_dir(argv[1], show_hidden);
-
-    hashtable_get(files, "aa"); //placeholder
     // output stats
+
+
+    // CHECK FOR -a before everything else
+    while((opt = getopt(argc, argv, OPTLIST)) != -1){
+        switch (opt) {
+            case 'a':
+                show_hidden = true;
+                break;
+            default:
+                break;     
+        }
+    } 
 
     while((opt = getopt(argc, argv, OPTLIST)) != -1){
         switch (opt) {
@@ -69,44 +77,53 @@ int main(int argc, char *argv[])
                 exit(EXIT_FAILURE);
 
             case 'a':
-                show_hidden = true;
-                printf("a\n");
+                // do nothing
                 break;
 
             case 'f': ;
             // get hash of file then continue with -h
                 // optind will point to filepath
-                //hash_key = strSHA2(argv[optind]);
+                hash_key = strSHA2(argv[optind]);
 
             case 'h': ;
             // NOTE: hash will appear before directory
 
                 // if hash_key != NULL then opt was -f
+                if (hash_key == NULL) {
+                    strcpy(hash_key, argv[optind]);
+                }
 
+                ++optind; // increment optind to index directory path
 
-                // increment optind to index directory path
-                ++optind;
+                files = hash_dir(argv[optind], show_hidden);
 
-                //hash_key = argv[optind];
+                bool complete = hf_flags(files, hash_key);
 
-
-                break;
-
-
-                printf("h\n");
-                break;
+                // check if successful
+                if (complete) {
+                    exit(EXIT_SUCCESS);
+                }
+                exit(EXIT_FAILURE);
 
             case 'l':
-                printf("l\n");
+                files = hash_dir(argv[optind], show_hidden);
                 break;
 
             case 'q':
-                printf("q\n");
-                break;
+                files = hash_dir(argv[optind], show_hidden);
+
+                if (total_files == min_files) {
+                    exit(EXIT_SUCCESS);
+                }
+                exit(EXIT_FAILURE);
+
             default:
                 usage(false);
         }
     }
+    // no flag has been parsed
+    files = hash_dir(argv[1], show_hidden);
+
     print_solutions();
     exit(EXIT_SUCCESS);
 }
