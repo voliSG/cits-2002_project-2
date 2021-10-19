@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 
 
     // CHECK FOR -a before everything else
-    while((opt = getopt(argc, argv, OPTLIST)) != -1){
+    /*while((opt = getopt(argc, argv, OPTLIST)) != -1){
         switch (opt) {
             case 'a':
                 show_hidden = true;
@@ -68,6 +68,11 @@ int main(int argc, char *argv[])
             default:
                 break;
         }
+    }*/
+    for(int i = 0; i < argc; i++){
+      if(strcmp(argv[i], "-a") == 0){
+       show_hidden = true;
+      }
     }
 
     while((opt = getopt(argc, argv, OPTLIST)) != -1){
@@ -107,7 +112,8 @@ int main(int argc, char *argv[])
 
             case 'l':
                 files = hash_dir(argv[optind], show_hidden);
-                l_flag(files);
+                printf("going to l flags\n");
+                l_flag(hash_array);
                 break;
 
             case 'q':

@@ -1,5 +1,7 @@
 #include "duplicates.h"
 
+int num_dup = 0;
+
 // return files
 HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
     HASHTABLE *files    = hashtable_init();
@@ -44,6 +46,7 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
 
                 // if return pointer (duplicate)
                 if (file != NULL) {
+                    num_dup++;
                     ++file->num_files;          // increment
 
                     // add filepath to FILE_DATA (*file)
@@ -55,8 +58,9 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
                     ++total_files;                      // increment total_files
                     total_size += stat_p->st_size;      // update total_size
 
-                    //
-
+                    //add duplicate hash to the hash_array
+                    hash_array = realloc(hash_array, num_dup*sizeof(filehash));
+                    hash_array[num_dup] = path_p;
 
                 // if return NULL (unique file)
                 } else {
