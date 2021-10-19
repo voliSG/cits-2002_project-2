@@ -75,25 +75,23 @@ int main(int argc, char *argv[])
 
             case 'f': ;
             // get hash of file then continue with -h
-
-
-
-            // NOTE: filepath will appear before directory
                 // optind will point to filepath
-                //char *file_path = argv[optind];
-
-                // obtain hash of file
-
-
-                // increment optind to index directory path
-                ++optind;
+                //hash_key = strSHA2(argv[optind]);
 
             case 'h': ;
             // NOTE: hash will appear before directory
 
                 // if hash_key != NULL then opt was -f
 
-                //char *hash_key = argv[optind];
+
+                // increment optind to index directory path
+                ++optind;
+
+                //hash_key = argv[optind];
+
+
+                break;
+
 
                 printf("h\n");
                 break;
