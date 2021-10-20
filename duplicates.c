@@ -39,8 +39,8 @@ void print_solutions() {
 int main(int argc, char *argv[]) {
     int opt;
 
-    // define hashtable to be used when determining outputs
-    HASHTABLE *files;
+    // init hashtable to be used when determining outputs
+    HASHTABLE *files    = hashtable_init();
 
     // file hash (usage: -f, -h)
     char *hash_key = NULL;
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         }
 
         ++optind; // increment optind to index directory path; 
-        files = hash_dir(argv[optind], show_hidden);
+        files = hash_dir(files, argv[optind], show_hidden);
 
         bool found = hf_flags(files, hash_key);
 
@@ -96,13 +96,13 @@ int main(int argc, char *argv[]) {
     }
 
     if (case_l) {
-        files = hash_dir(argv[optind], show_hidden);
+        files = hash_dir(files, argv[optind], show_hidden);
         l_flag(files, hash_array);
         exit(EXIT_SUCCESS);
     }
 
     if (case_q) {
-        files = hash_dir(argv[optind], show_hidden);
+        files = hash_dir(files, argv[optind], show_hidden);
 
         //
         if (total_files == min_files) {exit(EXIT_SUCCESS);}
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
     }
 
     // no flag has been parsed
-    files = hash_dir(argv[argc-1], show_hidden);
+    files = hash_dir(files, argv[argc-1], show_hidden);
 
     print_solutions();
     exit(EXIT_SUCCESS);

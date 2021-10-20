@@ -1,9 +1,7 @@
 #include "duplicates.h"
 
 // return files
-HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
-    HASHTABLE *files    = hashtable_init();
-
+HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
     DIR             *dirp;
     struct dirent   *dp;
 
@@ -27,7 +25,7 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
 
         if( S_ISDIR( stat_p->st_mode )) {
             if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0) {
-                hash_dir(pathname, show_hidden);
+                hash_dir(files, pathname, show_hidden);
             }
         }
         else if( S_ISREG( stat_p->st_mode )) {
@@ -35,7 +33,7 @@ HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
             FILE_DATA *file;
 
             // if show_hidden == true then read all files OR
-            // show_hidden == false AND file name starts with '.'
+            // show_hidden == false AND file name does not start with '.'
             if (show_hidden || (!show_hidden && dp->d_name[0] != '.')) {
                 filehash = strSHA2(pathname);
 
