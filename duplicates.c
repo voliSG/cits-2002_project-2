@@ -69,9 +69,11 @@ int main(int argc, char *argv[])
                 break;
         }
     }*/
+
     for(int i = 0; i < argc; i++){
       if(strcmp(argv[i], "-a") == 0){
-       show_hidden = true;
+        show_hidden = true;
+        break;
       }
     }
 
@@ -112,8 +114,7 @@ int main(int argc, char *argv[])
 
             case 'l':
                 files = hash_dir(argv[optind], show_hidden);
-                printf("going to l flags\n");
-                l_flag(hash_array);
+                l_flag(files, hash_array);
                 break;
 
             case 'q':
