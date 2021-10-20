@@ -1,7 +1,5 @@
 #include "duplicates.h"
 
-int num_dup = 0;
-
 // return files
 HASHTABLE *hash_dir(char *dirname, bool show_hidden) {
     HASHTABLE *files    = hashtable_init();
