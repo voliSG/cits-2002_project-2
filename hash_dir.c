@@ -50,7 +50,6 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
                     file->pathname = realloc(file->pathname, (file->num_files) * sizeof(path_p));         // allocate memory for one pointer of
                     file->pathname[file->num_files] = path_p;
 
-                    printf("dup: %s\n", path_p);
 
                     ++total_files;                      // increment total_files
                     total_size += stat_p->st_size;      // update total_size
@@ -77,7 +76,7 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
 
 
                     hashtable_add(files, p_newfile);                   // add new file to hashtable
-                    printf("Unique: %s\n", path_p);
+
 
                     ++total_files;                                     // increment total_files
                     ++min_files;                                       // increment min_files
