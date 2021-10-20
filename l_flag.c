@@ -2,7 +2,6 @@
 
 void l_output(FILE_DATA *dupfile){
 
-  //getting seg fault here... ;~;
   //use numfiles because the pathname array in that file will be the size of numfiles
   for(int i = 0; i < dupfile -> num_files; i++){
     printf("%s", dupfile -> pathname[i]); //getting each pathname
