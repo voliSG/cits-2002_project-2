@@ -30,10 +30,7 @@ void usage(bool a) {
 
 
 void print_solutions() {
-    printf("%i\n", total_files);
-    printf("%i\n", total_size);
-    printf("%i\n", min_files);
-    printf("%i\n", min_size);
+    printf("%i\n%i\n%i\n%i\n", total_files, total_size, min_files, min_size);
 }
 
 int main(int argc, char *argv[]) {
@@ -84,7 +81,7 @@ int main(int argc, char *argv[]) {
             hash_key = strSHA2(argv[optind]);
         }
 
-        ++optind; // increment optind to index directory path; 
+        ++optind; // increment optind to index directory path;
         files = hash_dir(files, argv[optind], show_hidden);
 
         bool found = hf_flags(files, hash_key);
