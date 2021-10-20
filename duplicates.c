@@ -76,10 +76,15 @@ int main(int argc, char *argv[]) {
     if (case_a) {show_hidden = true;}
 
     if (case_f || case_h) {
-        // if opt -f get the hash of the filename parsed
-        if (case_f) {
-            hash_key = strSHA2(argv[optind]);
+        // check number of args for -f or -h - print usage
+        if (argc - optind != 2) {       // get num of non flag args
+            printf("-f/-h option arg requires <filename/hash> <directory>\n");
+            exit(EXIT_FAILURE);
         }
+
+        // if opt -f get the hash of the filename parsed
+        if (case_f) {hash_key = strSHA2(argv[optind]);}
+        else        {hash_key = argv[optind];}
 
         ++optind; // increment optind to index directory path;
         files = hash_dir(files, argv[optind], show_hidden);

@@ -1,7 +1,7 @@
 #include "duplicates.h"
 
 void output(FILE_DATA *file) {
-    for (int i = 0; i < file->num_files; ++i) {
+    for (int i = 0; i <= file->num_files; ++i) {
         printf("%s\n", file->pathname[i]);
     }
 }
