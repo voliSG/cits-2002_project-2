@@ -11,7 +11,7 @@
 typedef struct _file{
     char *filehash;
     char **pathname;
-    int num_files;
+    int  num_files;
 }FILE_DATA;
 
 // define linked list struct
