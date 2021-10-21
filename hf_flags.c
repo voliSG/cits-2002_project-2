@@ -1,21 +1,20 @@
 #include "duplicates.h"
 
-void output(FILE_DATA *file) {
-    for (int i = 0; i <= file->num_files; ++i) {
-        printf("%s\n", file->pathname[i]);
-    }
-}
-
-bool hf_flags(HASHTABLE *files, char *hash_key) {
+bool hf_flags(HASHTABLE *files, char *hash_key, char *ignore) {
     FILE_DATA *file;
 
+    char *ignore_path = ignore;
     file = hashtable_get(files, hash_key);
 
     if (file == NULL) {
         return false;
     }
 
-    output(file);
+    for (int i = 0; i <= file->num_files; ++i) {
+      if(strcmp(file->pathname[i], ignore_path) != 0){
+        printf("%s\n", file->pathname[i]);
+      }
+    }
 
     return true;
 }

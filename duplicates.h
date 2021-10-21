@@ -21,7 +21,7 @@ extern char     **hash_array;
 // declare function that reads directory
 extern HASHTABLE    *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden);
 
-extern bool         hf_flags(HASHTABLE *files, char *hash_key);
+extern bool         hf_flags(HASHTABLE *files, char *hash_key, char *ignore);
 extern void         l_flag(HASHTABLE *files, char **dup_array);
 
 // declare SHA2 hash used for files

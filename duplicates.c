@@ -82,14 +82,20 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
 
+        char * cmp_path = NULL;
         // if opt -f get the hash of the filename parsed
-        if (case_f) {hash_key = strSHA2(argv[optind]);}
-        else        {hash_key = argv[optind];}
+        if (case_f) {
+          cmp_path = argv[optind];
+          hash_key = strSHA2(cmp_path);
+        }
+        else {
+          hash_key = argv[optind];
+        }
 
         ++optind; // increment optind to index directory path;
         files = hash_dir(files, argv[optind], show_hidden);
 
-        bool found = hf_flags(files, hash_key);
+        bool found = hf_flags(files, hash_key, cmp_path);
 
         // check if successful
         if (found) {exit(EXIT_SUCCESS);}
