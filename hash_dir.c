@@ -56,7 +56,7 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
                     if(file->num_files == 1){
                       num_dup++; //keep track of the duplicate hash array size
                       hash_array = realloc(hash_array, num_dup*sizeof(filehash));
-                      hash_array[num_dup-1] = filehash
+                      hash_array[num_dup-1] = filehash;
                     }
 
                 // if return NULL (unique file)
