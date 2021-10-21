@@ -4,8 +4,7 @@ void l_output(FILE_DATA *dupfile){
 
   //use numfiles because the pathname array in that file will be the size of numfiles
   for(int i = 0; i <= dupfile -> num_files; i++){
-    printf("%s", dupfile -> pathname[i]); //getting each pathname
-    printf("  ");
+    printf("%s\t", dupfile -> pathname[i]); //getting each pathname
   }
   printf("\n");
 }
