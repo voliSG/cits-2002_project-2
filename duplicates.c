@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
     if (case_l) {
         // check number of args for -l - print usage
         if (argc - optind != 1) {       // get num of non flag args
-            printf("-l option arg requires <directory>");
+            printf("-l option arg requires <directory>\n");
         }
 
         files = hash_dir(files, argv[optind], show_hidden);
@@ -125,7 +125,6 @@ int main(int argc, char *argv[]) {
 
     // no flag has been parsed
     files = hash_dir(files, argv[argc-1], show_hidden);
-
     print_solutions();
     exit(EXIT_SUCCESS);
 

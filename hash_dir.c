@@ -46,19 +46,17 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
 
                     // add filepath to FILE_DATA (*file)
                     char *path_p = strdup(pathname);
-
                     file->pathname = realloc(file->pathname, (file->num_files) * sizeof(path_p));         // allocate memory for one pointer of
                     file->pathname[file->num_files] = path_p;
-
 
                     ++total_files;                      // increment total_files
                     total_size += stat_p->st_size;      // update total_size
 
                     //add duplicate hash to the hash_array
-                    if(! (file->num_files > 1)){
+                    if(file->num_files == 1){
                       num_dup++; //keep track of the duplicate hash array size
                       hash_array = realloc(hash_array, num_dup*sizeof(filehash));
-                      hash_array[num_dup-1] = filehash;
+                      hash_array[num_dup-1] = filehash
                     }
 
                 // if return NULL (unique file)
