@@ -6,7 +6,7 @@ C11 = cc -std=c11
 CFLAGS = -Wall -Werror -pedantic
 
 $(PROJECT) : $(OBJ)
-	$(C11) $(CFLAGS) -o $(PROJECT) $(OBJ) -lm
+	$(C11) $(CFLAGS) -o $(PROJECT) $(OBJ) 
 
 duplicates.o : duplicates.c $(HEADERS)
 	$(C11) $(CFLAGS) -c duplicates.c
