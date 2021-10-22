@@ -5,17 +5,21 @@
 #include "duplicates.h"
 #include <getopt.h>
 
+// define option flags in char array
 #define OPTLIST    "aAfhlq"
 
-int total_files   = 0;
-int total_size    = 0;
-int min_files     = 0;
-int min_size      = 0;
 
-int num_dup = 0;
-char **hash_array = NULL;  // usage -l
+// initialise counters for output
+int total_files   = 0;      // total number of files found in specified directory
+int total_size    = 0;      // total size (in bytes) of all files found in directory
+int min_files     = 0;      // number of UNIQUE files in directory
+int min_size      = 0;      // size of files (in bytes) of all UNIQUE files
+
+int num_dup       = 0;      // number of duplicate files (only counted once)
+char **hash_array = NULL;   // array that holds the hashes of files that are duplicates (usage -l)
 
 
+// procedure that outputs program usage for incorrect params
 void usage(bool a) {
   //when argc < 2
   if (a) {
@@ -29,9 +33,11 @@ void usage(bool a) {
 }
 
 
+// procedure that outputs the results when no opt flags are input
 void print_solutions() {
     printf("%i\n%i\n%i\n%i\n", total_files, total_size, min_files, min_size);
 }
+
 
 int main(int argc, char *argv[]) {
     int opt;
@@ -59,6 +65,7 @@ int main(int argc, char *argv[]) {
     }
 
 
+    // process option args
     while((opt = getopt(argc, argv, OPTLIST)) != -1) {
         switch (opt) {
             case 'A':   case_A = true; break;
@@ -71,9 +78,12 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // check if advanced project is attemped
     if (case_A) {exit(EXIT_FAILURE);}
 
+    // check if all files are requested
     if (case_a) {show_hidden = true;}
+
 
     if (case_f || case_h) {
         // check number of args for -f or -h - print usage
@@ -85,11 +95,11 @@ int main(int argc, char *argv[]) {
         char * cmp_path = NULL;
         // if opt -f get the hash of the filename parsed
         if (case_f) {
-          cmp_path = argv[optind];
-          hash_key = strSHA2(cmp_path);
+            cmp_path = argv[optind];
+            hash_key = strSHA2(cmp_path);
         }
         else {
-          hash_key = argv[optind];
+            hash_key = argv[optind];
         }
 
         ++optind; // increment optind to index directory path;
@@ -125,6 +135,7 @@ int main(int argc, char *argv[]) {
 
     // no flag has been parsed
     files = hash_dir(files, argv[argc-1], show_hidden);
+
     print_solutions();
     exit(EXIT_SUCCESS);
 

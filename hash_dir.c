@@ -72,7 +72,6 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
                     p_newfile->pathname    = malloc(sizeof(path_p));   // init file
                     p_newfile->pathname[0] = path_p;
 
-
                     hashtable_add(files, p_newfile);                   // add new file to hashtable
 
 
