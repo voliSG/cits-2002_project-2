@@ -13,20 +13,20 @@ uint32_t hash_index(char *string) {
 
 
 // DEFINE LINKED LIST FUNCTIONS
+// function that finds desired string in linked list
 FILE_DATA *filehash_find(LIST *list, char *filehash) {
+    // while file is not found
     while(list != NULL) {
-        FILE_DATA *file = list->file;
-        // if filehash arg matches filehash in list
-        if(strcmp(file->filehash, filehash) == 0) {
-            return file;
+        FILE_DATA *file = list->file;                   // get file pointed to by list node
+        if(strcmp(file->filehash, filehash) == 0) {     // if filehash arg matches filehash in list
+            return file;                                // return FILE_DATA when match found
         }
         list = list->next;
     }
-
-    // no files found
-    return NULL;
+    return NULL;        // no files found - return NULL
 }
 
+// function that adds new linked list node
 LIST *list_add(LIST *list, FILE_DATA *file) {
     // allocate memory for 1 node
     LIST *new_ls    = malloc(sizeof(LIST));
@@ -44,11 +44,16 @@ HASHTABLE *hashtable_init() {
     return new_hasht;
 }
 
+
+// add FILE_DATA struct to hashtable
 void hashtable_add(HASHTABLE *hashtable, FILE_DATA *file) {
     uint32_t index = hash_index(file->filehash);
+    // set hashtable[index] to pointer to first list node
     hashtable[index] = list_add(hashtable[index], file);
 }
 
+
+// return FILE_DATA struct from specified hash
 FILE_DATA *hashtable_get(HASHTABLE *hashtable, char *filehash) {
     uint32_t index = hash_index(filehash);
     // store linked list pointer of hashtable index

@@ -9,15 +9,15 @@
 
 // define FILE_DATA struct
 typedef struct _file{
-    char *filehash;
-    char **pathname;
-    int  num_files;
+    char *filehash;             // string that holds SHA2 hash of file  
+    char **pathname;            // array of strings holds pathnames of duplicate files
+    int  num_files;             // holds number of files -1 (used for indexing)
 }FILE_DATA;
 
 // define linked list struct
 typedef struct _list{
-    struct _file    *file;
-    struct _list    *next;
+    struct _file    *file;      // pointer to a FILE_DATA struct
+    struct _list    *next;      // pointer to next linked list struct
 }LIST;
 
 
@@ -25,11 +25,11 @@ typedef struct _list{
 typedef LIST *HASHTABLE;
 
 // DECLARE FUNCTIONS THAT ARE DEFINED IN hashtable.c
-// hash function for array indexing
-extern  uint32_t        hash_string(char *string);
-
+// allocate memry for hashtable
 extern  HASHTABLE       *hashtable_init();
 
+// add FILE_DATA struct to hashtable
 extern  void            hashtable_add(HASHTABLE *hashtable, FILE_DATA *file);
 
+// return FILE_DATA struct from specified hash
 extern  FILE_DATA       *hashtable_get(HASHTABLE *hashtable, char *filehash);
