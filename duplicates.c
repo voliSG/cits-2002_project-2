@@ -29,6 +29,7 @@ void usage(bool a) {
   else {
     printf("The incorrect flag was used, (i.e. -a,-f,-h,-l,-q)\n");
   }
+  // exit program with failure
   exit(EXIT_FAILURE);
 }
 
@@ -84,7 +85,6 @@ int main(int argc, char *argv[]) {
     // check if all files are requested
     if (case_a) {show_hidden = true;}
 
-
     if (case_f || case_h) {
         // check number of args for -f or -h - print usage
         if (argc - optind != 2) {       // get num of non flag args
@@ -92,24 +92,26 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
 
-        char * cmp_path = NULL;
-        // if opt -f get the hash of the filename parsed
-        if (case_f) {
-            cmp_path = argv[optind];
-            hash_key = strSHA2(cmp_path);
+        char * cmp_path = NULL;             // path not included in output (usage -f)
+        
+        if (case_f) {                       // if opt -f get the hash of the filename parsed
+            cmp_path = argv[optind];        // optind currently points to argv with filename
+            hash_key = strSHA2(cmp_path);   // get hash_key of filename specified
         }
-        else {
-            hash_key = argv[optind];
+        else {                              // else case_h
+            hash_key = argv[optind];        // optind currently points to hash
         }
 
-        ++optind; // increment optind to index directory path;
+        ++optind;                           // increment optind to index directory path;
+        
+        // read directory specified and return hashtable of all file data
         files = hash_dir(files, argv[optind], show_hidden);
 
         bool found = hf_flags(files, hash_key, cmp_path);
 
-        // check if successful
+        // if file found then exit success
         if (found) {exit(EXIT_SUCCESS);}
-        // else
+        // else exit failure
         exit(EXIT_FAILURE);
     }
 
@@ -119,24 +121,27 @@ int main(int argc, char *argv[]) {
             printf("-l option arg requires <directory>\n");
         }
 
+        // read directory specified and return hashtable of all file data
         files = hash_dir(files, argv[optind], show_hidden);
+
         l_flag(files, hash_array);
         exit(EXIT_SUCCESS);
     }
 
     if (case_q) {
+        // read directory specified and return hashtable of all file data
         files = hash_dir(files, argv[optind], show_hidden);
 
-        //
+        // if there are no duplicates then exit success
         if (total_files == min_files) {exit(EXIT_SUCCESS);}
-        //
+        // else exit failure
         exit(EXIT_FAILURE);
     }
 
     // no flag has been parsed
+    // read directory specified and return hashtable of all file data
     files = hash_dir(files, argv[argc-1], show_hidden);
 
     print_solutions();
     exit(EXIT_SUCCESS);
-
 }
