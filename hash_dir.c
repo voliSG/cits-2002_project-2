@@ -1,6 +1,6 @@
 #include "duplicates.h"
 
-// return files
+// PROCESS DIRECTORIES AND RETURN HASHTABLE THAT HOLDS ALL FILE PATHS AND HASHES
 HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
     DIR             *dirp;
     struct dirent   *dp;
@@ -16,18 +16,21 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
         struct stat *stat_p = &stat_buffer;
         char            pathname[MAXPATHLEN];
 
-        sprintf(pathname, "%s/%s", dirname, dp->d_name);
+        sprintf(pathname, "%s/%s", dirname, dp->d_name);    // concatenates dirname + d_name to char *pathname
 
         if(stat(pathname, &stat_buffer) != 0) {
             perror( pathname );
             exit(EXIT_FAILURE);
         }
 
+        // if path is a new directory then call function recursively for new path
         if( S_ISDIR( stat_p->st_mode )) {
+            // check if directory is . (current) or .. (parent)
             if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0) {
                 hash_dir(files, pathname, show_hidden);
             }
         }
+        // if path is a file then process new file
         else if( S_ISREG( stat_p->st_mode )) {
             char *filehash;
             FILE_DATA *file;
@@ -42,15 +45,15 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
 
                 // if return pointer (duplicate)
                 if (file != NULL) {
-                    ++file->num_files;          // increment
+                    ++file->num_files;          // increment num_files
 
                     // add filepath to FILE_DATA (*file)
                     char *path_p = strdup(pathname);
                     file->pathname = realloc(file->pathname, (file->num_files) * sizeof(path_p));         // allocate memory for one pointer of
-                    file->pathname[file->num_files] = path_p;
+                    file->pathname[file->num_files] = path_p;   // add pathname to pathname array
 
-                    ++total_files;                      // increment total_files
-                    total_size += stat_p->st_size;      // update total_size
+                    ++total_files;                              // increment total_files
+                    total_size += stat_p->st_size;              // update total_size
 
                     //add duplicate hash to the hash_array
                     if(file->num_files == 1){
@@ -68,7 +71,7 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
                     p_newfile->filehash    = strdup(filehash);         // set filehash
                     p_newfile->num_files   = 0;                        // set num_files
 
-                    char *path_p = strdup(pathname);                   //
+                    char *path_p = strdup(pathname);                   // allocate memory and return char* pointer to path_p
                     p_newfile->pathname    = malloc(sizeof(path_p));   // init file
                     p_newfile->pathname[0] = path_p;
 
@@ -87,7 +90,6 @@ HASHTABLE *hash_dir(HASHTABLE *files, char *dirname, bool show_hidden) {
         }
     }
     closedir(dirp);
-
 
     return files;
 }
